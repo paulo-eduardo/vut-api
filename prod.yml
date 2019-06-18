@@ -1,0 +1,11 @@
+version: "3.6"
+services:
+  api:
+    build:
+      context: ./api
+      target: deploy
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/STAM-institucional
+
+  mongodb:
+    image: mongo:latest
