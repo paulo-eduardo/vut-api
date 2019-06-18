@@ -1,0 +1,6 @@
+{
+  "name": "Server Test",
+  "database": "mongodb://192.168.99.104:27017/test",
+  "port": 3100,
+  "secret": "SAUIHGFUI214214"
+}
