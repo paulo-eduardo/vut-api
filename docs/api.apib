@@ -1,0 +1,218 @@
+FORMAT: 1A
+
+HOST: http://localhost:3000/v1
+
+# VUTTR API
+
+Managing useful tools and making it easy to find when you need it.
+
+# Group Authorization
+
+## User [/register]
+
+Register a user
+
+### Register [POST]
+
+
++ Request Create new User
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+    + Attributes (User)
+
++ Response 201 (application/json)
+    + Attributes (OAuth valid response)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+## OAuth token exchange [/oauth/token]
+
+Signin with user credentials (email, password)
+
+### Get Token [POST]
+
++ Request Get User Token
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+    + Attributes (AuthUser)
+
++ Response 200 (application/json)
+    + Attributes (OAuth valid response)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+
+# Group Tools
+
+## Tools [/tools]
+
+### List tools [GET]
+
+List all tools for the User
+
++ Request list tools
+    + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json)
+    + Attributes (array[Tool])
+
++ Response 401 (application/json)
+    + Attributes (Error)
+    
++ Response 404 (application/json)
+    + Attributes (Error)
+
+### Store new tool [POST]
+
+Store a new tool for the user
+
++ Request Store new tool
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: Bearer JWT
+    + Attributes (CreateTool)
+
++ Response 201 (application/json)
+    + Attributes (Tool)
+
++ Response 401 (application/json)
+    + Attributes (Error)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
+## List tools filter tag [/tools{?tags}]
+
+We add the query URI `tags`. This parameter is user for filtering the tags of
+of the tools.
+
++ Parameters
+    + tags: node, express (array[int])
+
+### List tools [GET]
+
++ Request List tools
+
+    + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json)
+    + Attributes (Tool)
+
++ Response 401 (application/json)
+    + Attributes (Error)
+
++ Response 404 (application/json)
+    + Attributes (Error)
+
+## Tool [/tool/{id}]
+
+Manage a tool with id 1
+
++ Parameters
+    + id: 1 (number, required) - Tool's ID
+
+### Get tool [GET]
+
++ Request get tool with id 1
+    + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json)
+    + Attributes (Tool)
+
++ Response 401 (application/json)
+    + Attributes (Error)
+
++ Response 404 (application/json)
+    + Attributes (Error)
+
+
+### Delete Tool [DELETE]
+
++ Request delete a tool with id 1
+    + Headers
+
+            Authorization: Bearer JWT
+
++ Response 200 (application/json)
+    + Attributes (Id)
+
++ Response 401 (application/json)
+    + Attributes (Error)
+
++ Response 404 (application/json)
+    + Attributes (Error)
+
+### Change tool [POST]
+
++ Request change a tool with id 1
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+            Authorization: Bearer JWT
+    + Attributes (CreateTool)
+
++ Response 200 (application/json)
+    + Attributes (Tool)
+
++ Response 400 (application/json)
+    + Attributes (Error)
+
++ Response 401 (application/json)
+    + Attributes (Error)
+
+
+# Data Structures
+
+## CreateTool
++ title (string) - Name of the tool
++ link (string) - URL for the tool
++ description (string) - Description for the tool
++ tags (array[string]) - Tags used to filter the tool later
+
+## Tool
++ title (string) - Name of the tool
++ link (string) - URL for the tool
++ description (string) - Description for the tool
++ tags (array[string]) - Tags used to filter the tool later
++ id(number) - return the id of the tool
+
+## Error (object)
++ code: 400 (number) - Status code
++ message (string) - Message status
++ description (string) - Description status
+
+## Id (object)
++ id (number) - Processed Id
+
+## User
++ name (string) - Name for the User
++ email (string) - Email for the User
++ password (string) - password for the User
+
+## AuthUser
++ email (string) - Email for the User
++ password (string) - password for the User
+
+## OAuth valid response (object)
++ access_token: `eyJhbGciOiJIUzI1NiJ9.e30.XmNK3GpH3Ys_7wsYBfq4C3M6goz71I7dTgUkuIa5lyQ` (string, required) - valid JWT
++ expires_in: 3600 (number, required)
++ token_type: Bearer (string, required)
