@@ -1,0 +1,10 @@
+{
+  "name": "vut",
+  "version": "1.0.0",
+  "description": "Manage useful tool",
+  "main": "index.js",
+  "repository": "https://github.com/Paulo-Eduardo/vut-api",
+  "author": "Paulo Eduardo",
+  "license": "MIT",
+  "private": false
+}
