@@ -8,17 +8,12 @@ COPY . .
 FROM node:slim as dev
 COPY --from=common /api /api
 WORKDIR /api
+EXPOSE 3000
 CMD ["yarn", "dev"]
-
-### STAGE 2: Test ###
-FROM node:slim as test
-COPY --from=common /api /api
-WORKDIR /api
-CMD ["yarn", "test"]
 
 ### STAGE 2: Deploy ###
 FROM node:slim as deploy
 COPY --from=common /api /api
 WORKDIR /api
-RUN yarn build
+EXPOSE 3000
 CMD ["yarn", "serve"]

@@ -4,8 +4,28 @@ services:
     build:
       context: ./api
       target: deploy
-    environment:
-      MONGO_URI: mongodb://mongodb:27017/STAM-institucional
+    restart: always
+    volumes:
+      - ./api:/api
+    ports:
+      - "3000:3000"
+    links:
+      - mongodb
+    depends_on:
+      - mongodb
 
   mongodb:
     image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - mongodb-data:/data/db
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
+
+volumes:
+  mongodb-data:
+  api:

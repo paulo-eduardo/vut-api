@@ -7,7 +7,7 @@ const ToolController = require('./controllers/Tool')
 
 const routes = new express.Router()
 
-routes.get('', (req, res) => {
+routes.get('/', (req, res) => {
   return res.status(200).json({ message: 'Server is up' })
 })
 

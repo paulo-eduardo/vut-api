@@ -17,7 +17,7 @@ services:
   api:
     build:
       context: ./api
-      target: deploy
+      target: dev
     restart: always
     volumes:
       - ./api:/api

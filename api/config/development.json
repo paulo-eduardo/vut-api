@@ -1,6 +1,6 @@
 {
   "name": "Server Developement",
-  "database": "mongodb://mongodb:27017/evelopment",
+  "database": "mongodb://mongodb:27017/development",
   "port": 3000,
   "secret": "SAUIHGFUI214214"
 }
