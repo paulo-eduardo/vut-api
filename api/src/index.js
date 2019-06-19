@@ -16,7 +16,7 @@ mongoose.connection.once('open', () => {
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use('/v1/', require('./routes'))
+app.use('/v1', require('./routes'))
 
 const listen = app.listen(config.get('port'), () => {
   debug(
