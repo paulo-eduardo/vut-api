@@ -16,22 +16,11 @@ const createATool = async (token, title, link, description, tags) => {
 }
 
 const createManyTools = async token => {
-  await createATool(token, 'tool1', 'tool1', 'tool1', 'tool1', ['1'])
-  await createATool(token, 'tool2', 'tool2', 'tool2', 'tool2', ['1', '2'])
-  await createATool(token, 'tool3', 'tool3', 'tool3', 'tool3', ['1', '2', '3'])
-  await createATool(token, 'tool4', 'tool4', 'tool4', 'tool4', [
-    '1',
-    '2',
-    '3',
-    '4'
-  ])
-  await createATool(token, 'tool5', 'tool5', 'tool5', 'tool5', [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5'
-  ])
+  await createATool(token, 'tool1', 'tool1', 'tool1', ['1'])
+  await createATool(token, 'tool2', 'tool2', 'tool2', ['1', '2'])
+  await createATool(token, 'tool3', 'tool3', 'tool3', ['1', '2', '3'])
+  await createATool(token, 'tool4', 'tool4', 'tool4', ['1', '2', '3', '4'])
+  await createATool(token, 'tool5', 'tool5', 'tool5', ['1', '2', '3', '4', '5'])
 }
 
 describe('Tools API Tests', function () {
@@ -143,12 +132,13 @@ describe('Tools API Tests', function () {
 
   it('GET /v1/tool?{*tags} Filter tool with tags', async () => {
     const response = await request(server)
-      .post(`/v1/tool?tags=3,4`)
+      .get(`/v1/tool?tags=2,3`)
       .set({
         Authorization: `Bearer ${token}`,
         Accept: 'application/json',
         'Content-Type': 'application/json'
       })
     expect(response.status).to.equal(200)
+    expect(response.body).to.be.an.instanceof(Array)
   })
 })

@@ -11,6 +11,6 @@ module.exports = {
   async truncateTools () {
     // should remove all tools
 
-    await Tool.deleteOne({ name: 'Nay' })
+    await Tool.deleteMany({})
   }
 }

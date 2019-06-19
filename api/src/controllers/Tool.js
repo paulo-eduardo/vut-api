@@ -1,13 +1,18 @@
 const Tool = require('../models/Tool')
 
 module.exports = {
-  async index (req, res) {
-    try {
-      const tools = await Tool.find({})
-      res.status(200).send(tools)
-    } catch (error) {
-      res.status(400).send({ message: 'Internal server error' })
-    }
+  index (req, res) {
+    Tool.find({}, (error, tools) => {
+      if (error) {
+        return res.status(400).json({
+          code: 400,
+          message: 'Wrong credentials!',
+          description: error
+        })
+      }
+
+      return res.status(200).json(tools)
+    })
   },
 
   store (req, res) {
@@ -83,7 +88,17 @@ module.exports = {
 
   findTags (req, res) {
     const tags = req.query.tags.split(',')
-    console.log('deveria ter entrado aqui =>', tags)
-    return res.status(200).json({ message: `Removed tool: ${req.params.id}` })
+
+    Tool.find({ tags: { $all: tags } }, (error, tools) => {
+      if (error) {
+        return res.status(400).json({
+          code: 400,
+          message: 'Wrong credentials!',
+          description: error
+        })
+      }
+
+      return res.status(200).json(tools)
+    })
   }
 }
