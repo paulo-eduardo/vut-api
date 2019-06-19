@@ -16,5 +16,9 @@ routes.post('/oauth/token', AuthController.sigin)
 
 routes.get('/tools', AuthMiddleware, ToolController.index)
 routes.post('/tools', AuthMiddleware, ToolController.store)
+routes.get('/tool', AuthMiddleware, ToolController.findTags)
+routes.get('/tool/:id', AuthMiddleware, ToolController.findId)
+routes.put('/tool/:id', AuthMiddleware, ToolController.update)
+routes.delete('/tool/:id', AuthMiddleware, ToolController.delete)
 
 module.exports = routes
