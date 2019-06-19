@@ -15,5 +15,6 @@ routes.post('/register', AuthController.register)
 routes.post('/oauth/token', AuthController.sigin)
 
 routes.get('/tools', AuthMiddleware, ToolController.index)
+routes.post('/tools', AuthMiddleware, ToolController.store)
 
 module.exports = routes
